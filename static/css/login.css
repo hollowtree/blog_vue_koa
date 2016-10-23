@@ -1,0 +1,57 @@
+body {
+    background: #f3f5f6;
+}
+
+#login {
+    position: absolute;
+    left: 50%;
+    top: 25%;
+    transform: translate(-50%);
+    max-width: 350px;
+    box-shadow: 0px 0px 3px 2px #e9ebec;
+}
+
+.login-nav {
+    padding: 0 10%;
+    font-size: 18px;
+    margin: 8px 0 16px;
+}
+
+.login-nav ul {
+    width: 8em;
+    margin: 6px auto;
+    padding-bottom: 6px;
+    position: relative;
+}
+
+.login-nav li {
+    text-align: center;
+    width: 4em;
+    float: left;
+}
+
+.login-nav-slider {
+    height: 3px;
+    width: 2.4em;
+    background: #0275d8;
+    position: absolute;
+    bottom: 0;
+    transition: left .2s ease-in;
+}
+
+.login-nav-slider1 {
+    left: .8em;
+}
+
+.login-nav-slider2 {
+    left: 4.8em;
+}
+
+.login-nav li:hover {
+    cursor: pointer
+}
+
+.login-nav li.active {
+    color: #0275d8;
+    text-shadow: 1px 0 1px #4fa0e6
+}

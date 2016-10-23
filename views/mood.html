@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% block head %} {% endblock %} {% block connect %}
+<nav class="navbar navbar-light bg-faded mb-1">
+    <a class="navbar-brand" href="#">Blog</a>
+    <ul class="nav navbar-nav">
+        <li class="nav-item active">
+            <a class="nav-link" href="#">碎碎念</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">日志</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Gist</a>
+        </li>
+        <li class="nav-item float-xs-right">
+            <a class="nav-link" href="#">{{name}}</a>
+        </li>
+    </ul>
+</nav>
+
+
+<div>
+    <form action="/user/{{name}}/mood/{{index}}" method="post">
+        <textarea rows="5" cols="60" name="mood" placeholder="What's on your mind?'" class="form-control"></textarea>
+        <p class="clearfix mt-1">
+            <input type="submit" value="发布" class="btn btn-primary float-xs-right" />
+        </p>
+    </form>
+</div>
+{% for item in data %}
+
+<div class="show mb-1 pl-1 pt-1">
+    <h5>
+        {{item.name}}
+        <small class="text-muted">{{item.createDate.toLocaleString()}}</small>
+    </h5>
+    <p class="mb-0">{{ item.mood }}</p>
+</div>
+
+
+{% endfor %}
+
+<nav>
+    <ul class="pagination-lg">
+        <li class=""><a href="#">&larr; Older</a></li>
+        <li><a href="#">Newer &rarr;</a></li>
+    </ul>
+</nav>
+<!--<script src="/js/mood.js"></script> -->
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %} {% block head %}
+<link rel="stylesheet" type="text/css" href="css/login.css"> {% endblock %} {% block connect %}
+
+<div id="login" class="col-xs-8 col-sm-6 col-md-4">
+    <div class="clearfix login-nav">
+        <ul class="list-unstyled clearfix">
+            <li v-bind:class="{active:panelin}" v-on:click="signin">登录</li>
+            <li v-bind:class="{active:panelup}" v-on:click="signup">注册</li>
+            <span v-bind:class="{'login-nav-slider1':panelin,'login-nav-slider2':panelup}" class="login-nav-slider"></span>
+        </ul>
+    </div>
+    <div v-show="panelin">
+        <form action="/login" method="post" class="form-horizontal" role="form">
+            <div class="form-group">
+                <!--<label class="control-label col-lg-1">用户名</label>-->
+                <input type="text" name="name" placeholder="用户名" class="form-control" autofocus />
+            </div>
+            <div class="form-group">
+                <input type="text" name="password" placeholder="密码" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="登录" class="btn btn-primary btn-block" />
+            </div>
+        </form>
+    </div>
+    <div v-show="panelup">
+        <form action="/logup" method="post" class="form-horizontal" role="form">
+            <div class="form-group">
+                <!--<label class="control-label col-lg-1">用户名</label>-->
+                <input type="text" name="name" placeholder="用户名" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="text" name="email" placeholder="邮箱" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="text" name="password" placeholder="密码" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="注册" class="btn btn-primary btn-block" />
+            </div>
+        </form>
+    </div>
+</div>
+<script src="js/login.js"></script> {% endblock %}

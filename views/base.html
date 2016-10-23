@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{title}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi"
+        crossorigin="anonymous">
+    <link href="/css/main.css" rel="stylesheet">
+    <script src="//cdn.bootcss.com/vue/2.0.3/vue.min.js"></script>
+    <!--<script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.js"></script>-->
+    {% block head %}{% endblock %}
+</head>
+
+<body class="container">
+    {% block connect %}{% endblock %}
+</body>
+
+</html>
