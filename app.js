@@ -28,11 +28,13 @@ app.use(bodyParser());
 // --- router --- //
 router.get('/', routerController.getRoot());
 router.get('/login', routerController.getLogin());
-router.get('/user/:name/mood/:index', routerController.getMood());
+router.get('/logout', routerController.getLogout());
+router.get('/user/:username/mood/:index', routerController.getMood());
+
 
 router.post('/login', routerController.postLogin());
 router.post('/logup', routerController.postLogup());
-router.post('/user/:name/mood/:index', routerController.postMood());
+router.post('/user/:username/mood/:index', routerController.postMood());
 
 
 // router.get('/json/:type/:index', routerController.getJson());

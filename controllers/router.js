@@ -24,35 +24,18 @@ exports.getRoot = () => {
 
 exports.getLogin = () => {
     return async(ctx, next) => {
-        ctx.body = env.render('login.html');
+        ctx.body = env.render('login.html', {
+            title: '登录 / 注册'
+        });
     };
 };
-
-// --- dynamic routes --- //
-exports.getMood = () => {
+exports.getLogout = () => {
     return async(ctx, next) => {
-        var name = ctx.params.name,
-            index = ctx.params.index;
-        console.log("user", name);
-        await moodModel.find({
-            name: name
-        }).sort({
-            createDate: -1
-        }).skip(
-            (index - 1) * 10
-        ).limit(
-            10
-        ).exec((err, docs) => {
-            console.log(docs);
-            ctx.body = env.render('mood.html', {
-                name: name,
-                index: index,
-                data: docs
-            })
-        })
-
-    };
-};
+        ctx.cookies.set('name', '');
+        ctx.cookies.set('flag', '');
+        ctx.redirect('/')
+    }
+}
 
 exports.getJson = () => {
     return async(ctx, next) => {
@@ -116,37 +99,77 @@ exports.postLogup = () => {
     }
 }
 
+
+// --- dynamic routes --- //
+exports.getMood = () => {
+    return async(ctx, next) => {
+        var user = ctx.params.username,
+            index = parseInt(ctx.params.index),
+            name = ctx.cookies.get('name');
+        console.log('name-----------------', name);
+
+        console.log("user-----------------", user);
+        await moodModel.find({
+            name: user
+        }).sort({
+            createDate: -1
+        }).skip(
+            (index - 1) * 10
+        ).limit(
+            11
+        ).exec((err, docs) => {
+            console.log('length:', docs.length);
+            ctx.body = env.render('mood.html', {
+                name: name,
+                user: user,
+                index: index,
+                length: docs.length,
+                data: docs
+            });
+        });
+
+    };
+};
+
 exports.postMood = () => {
     return async(ctx, next) => {
-        if (!ctx.request.body.mood) {
-            return;
+        if (ctx.request.body.mood) {
+            var flag = debase(ctx.cookies.get('flag'));
+            console.log(flag);
+            await nameModel.find({
+                name: flag.name
+            }, (err, docs) => {
+                if (docs[0].salt == flag.salt) {
+                    console.log('user ');
+                    var moodEntity = new moodModel({
+                        name: flag.name,
+                        mood: ctx.request.body.mood
+                    });
+                    moodEntity.save(() => {
+                        console.log("mood saved!");
+                    });
+                }
+            });
         }
-        var flag = debase(ctx.cookies.get('flag'));
-        console.log(flag);
-        await nameModel.find({
-            name: flag.name
-        }, (err, docs) => {
-            if (docs[0].salt == flag.salt) {
-                console.log('user ');
-                var moodEntity = new moodModel({
-                    name: flag.name,
-                    mood: ctx.request.body.mood
-                });
-                moodEntity.save(() => {
-                    console.log("mood saved!");
-                });
-            }
-        });
-        var user = ctx.params.name,
-            index = ctx.params.index;
-        await moodModel.find((err, docs) => {
-            console.log(docs);
+        var name = ctx.params.name,
+            index = parseInt(ctx.params.index);
+        console.log("user", name);
+        await moodModel.find({
+            name: name
+        }).sort({
+            createDate: -1
+        }).skip(
+            (index - 1) * 10
+        ).limit(
+            11
+        ).exec((err, docs) => {
+            console.log('length:', docs.length);
             ctx.body = env.render('mood.html', {
-                name: user,
+                name: name,
                 index: index,
+                length: docs.length,
                 data: docs
-            })
+            });
         });
-        // ctx.body = env.render('mood.html');
     }
 }

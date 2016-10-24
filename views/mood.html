@@ -5,15 +5,21 @@
         <li class="nav-item active">
             <a class="nav-link" href="#">碎碎念</a>
         </li>
-        <li class="nav-item">
+        <!--<li class="nav-item">
             <a class="nav-link" href="#">日志</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Gist</a>
-        </li>
+        </li>-->
+        {% if name %}
         <li class="nav-item float-xs-right">
-            <a class="nav-link" href="#">{{name}}</a>
+            <a class="nav-link" href="/logout">{{name}} 退出</a>
         </li>
+        {% else %}
+        <li class="nav-item float-xs-right">
+            <a class="nav-link" href="/login">登录</a>
+        </li>
+        {% endif %}
     </ul>
 </nav>
 
@@ -27,23 +33,27 @@
     </form>
 </div>
 {% for item in data %}
-
+<!--{% if loop.index != 11 %}-->
 <div class="show mb-1 pl-1 pt-1">
+    <!--{{loop.length}} - {{loop.index}}-->
     <h5>
-        {{item.name}}
-        <small class="text-muted">{{item.createDate.toLocaleString()}}</small>
+        {{item.name}}-{{name}}
+        <small class="text-muted">{{item.createDate.toLocaleString()}}</small> {% if name==item.name %}
+        <button class="btn btn-sm float-xs-right mr-1 del" data-id="{{item._id}}">删除</button> {% endif %}
     </h5>
     <p class="mb-0">{{ item.mood }}</p>
 </div>
-
-
+<!--{% endif %} -->
 {% endfor %}
 
-<nav>
-    <ul class="pagination-lg">
-        <li class=""><a href="#">&larr; Older</a></li>
-        <li><a href="#">Newer &rarr;</a></li>
-    </ul>
-</nav>
-<!--<script src="/js/mood.js"></script> -->
-{% endblock %}
+<p class="clearfix">
+    {% if index==1 %}
+    <a href="#" class="btn btn-primary btn-sm float-xs-left disabled">&larr; Older</a> {% else %}
+    <a href="/user/{{name}}/mood/{{index - 1 }}" class="btn btn-primary btn-sm float-xs-left">&larr; Older</a> {% endif %}
+    {% if length!=11 %}
+    <a href="#" class="btn btn-primary btn-sm float-xs-right disabled">Newer &rarr;</a> {% else %}
+    <a href="/user/{{name}}/mood/{{index + 1 }}" class="btn btn-primary btn-sm float-xs-right">Newer &rarr;</a> {% endif
+    %}
+</p>
+
+<script src="/js/mood.js"></script> {% endblock %}
