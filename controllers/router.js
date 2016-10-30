@@ -174,9 +174,6 @@ exports.getLog = () => {
         var user = ctx.params.username,
             index = parseInt(ctx.params.index),
             name = ctx.cookies.get('name');
-        console.log('name-----------------', name);
-
-        console.log("user-----------------", user);
         await logModel.find({
             name: user
         }).sort({
@@ -198,7 +195,6 @@ exports.getLog = () => {
 
     };
 };
-
 exports.postLog = () => {
     return async (ctx, next) => {
         if (ctx.request.body.title) {
@@ -206,18 +202,36 @@ exports.postLog = () => {
             console.log(ctx.request.body);
             await nameModel.find({
                 name: flag.name
-            }, (err, docs) => {
+            }).exec((err, docs) => {
                 if (docs[0].salt == flag.salt) {
-                    console.log('user ');
-                    var logEntity = new logModel({
+                    logModel.findOne({
                         name: flag.name,
-                        title:ctx.request.body.title,
-                        log: ctx.request.body.logtext,
-                        logHtml:marked(ctx.request.body.logtext),
-                    });
-                    logEntity.save(() => {
-                        console.log("log saved!");
-                    });
+                        title: ctx.request.body.title
+                    }).exec((err, doc) => {
+                        console.log(doc);
+
+                        if (doc) {
+                            doc.log = ctx.request.body.logtext,
+                                doc.logHtml = marked(ctx.request.body.logtext),
+                                doc.save((err) => {
+                                    if (err) {
+                                        console.log(err);
+                                    } else {
+                                        console.log('Update Log Succeeded');
+                                    }
+                                });
+                        } else {
+                            var logEntity = new logModel({
+                                name: flag.name,
+                                title: ctx.request.body.title,
+                                log: ctx.request.body.logtext,
+                                logHtml: marked(ctx.request.body.logtext),
+                            });
+                            logEntity.save((err) => {
+                                console.log("log saved!");
+                            });
+                        }
+                    })
                 }
             });
         }
@@ -226,10 +240,12 @@ exports.postLog = () => {
 }
 
 exports.editLog = () => {
-    return async (ctx, next) => {
+    return async(ctx, next) => {
         console.log(ctx.request.header.referer);
         console.log(ctx.query);
-        await logModel.find({ _id: ctx.query.id }).exec((err, docs) => {
+        await logModel.find({
+            _id: ctx.query.id
+        }).exec((err, docs) => {
             // if (docs[0]) {
             //     docs[0].remove((err) => { console.log(err); });
             // };
@@ -241,12 +257,16 @@ exports.editLog = () => {
 };
 
 exports.delLog = () => {
-    return async (ctx, next) => {
+    return async(ctx, next) => {
         console.log(ctx.request.header.referer);
         console.log(ctx.query);
-        await logModel.find({ _id: ctx.query.id }).exec((err, docs) => {
+        await logModel.find({
+            _id: ctx.query.id
+        }).exec((err, docs) => {
             if (docs[0]) {
-                docs[0].remove((err) => { console.log(err); });
+                docs[0].remove((err) => {
+                    console.log(err);
+                });
             }
         });
         ctx.redirect(ctx.request.header.referer);

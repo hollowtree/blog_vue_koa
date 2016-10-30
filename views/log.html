@@ -5,11 +5,12 @@
 <link rel="stylesheet" href="/css/log.css">
 {% endblock %} {% block connect %}
 <input type="button" value="显示/隐藏markdown编辑器" class="btn btn-primary btn-sm my-1" id="newLog" />
-<form action="/user/{{name}}/log/{{index}}" method="post" class="my-1" id="logForm">
+<form action="/user/{{name}}/log" method="post" class="my-1" id="logForm">
     <div class="col-xs-8">
         <input type="text" name="title" class="form-control" placeholder="标题" id="logTitle" />
     </div>
     <input type="submit" value="保存" class="btn btn-primary" />
+    <input type="button" value="取消编辑" class="btn" id="cancelEdit" />
     <div id="logBox" class="mt-1">
         <textarea id="logText" name="logtext" placeholder="请输入..."></textarea>
         <div id="logShow">

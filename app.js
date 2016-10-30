@@ -38,7 +38,7 @@ router.post('/login', routerController.postLogin());
 router.post('/logup', routerController.postLogup());
 router.post('/user/:username/mood/:index', routerController.postMood());
 router.post('/del/mood', routerController.delMood());
-router.post('/user/:username/log/:index', routerController.postLog());
+router.post('/user/:username/log', routerController.postLog());
 router.post('/del/log', routerController.delLog());
 router.post('/edit/log', routerController.editLog());
 app.use(router.routes());

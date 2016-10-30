@@ -41,10 +41,6 @@
             }).then(function (response) {
                 console.log("response: ", response);
                 // if (response.status == 200) {
-                //     console.log(90);
-                //     console.log(e.target.className);
-                //     e.target.className += ' disabled';
-                //     e.target.value='已删除'
                 // }
                 return response.json();
             }).then(function (data) {
@@ -58,6 +54,12 @@
             });
         })
     }
+    // --- 取消编辑
+    document.getElementById('cancelEdit').addEventListener('click', function () {
+        document.getElementById('logTitle').value = '';
+        document.getElementById('logText').value = '';
+        document.getElementById('logShowS').innerHTML = '';
+    });
     // --- 删除
     var delBtns = document.getElementsByClassName('del');
     for (let i = 0; i < delBtns.length; i++) {
