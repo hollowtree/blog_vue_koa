@@ -1,16 +1,25 @@
 {
-  "devDependencies": {
-    "babel-core": "^6.17.0",
+  "name": "node-js-getting-started",
+  "version": "0.2.5",
+  "description": "A sample Node.js app using Express 4",
+  "engines": {
+    "node": "6.9.1"
+  },
+  "main": "start.js",
+  "scripts": {
+    "start": "node start.js"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "babel-core": "^6.18.0",
     "babel-preset-stage-3": "^6.17.0",
-    "koa": "^2.0.0",
+    "koa": "^2.0.0-alpha.7",
     "koa-bodyparser": "^3.2.0",
     "koa-router": "^7.0.1",
     "koa-static": "^2.0.0",
-    "mongoose": "^4.6.3",
-    "nunjucks": "2.4.3"
-  },
-  "dependencies": {
-    "moment": "^2.15.1",
-    "moment-timezone": "^0.5.7"
+    "marked": "^0.3.6",
+    "mongoose": "^4.6.5",
+    "nunjucks": "^2.5.2",
+    "ws": "^1.1.1"
   }
 }

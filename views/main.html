@@ -1,7 +1,37 @@
 {% extends "base.html" %} {% block connect %}
 
-<ul>
-    <li><a href="/login">登录</a></li>
-    <li><a href="/user/{{name}}/mood/1">我的主页</a></li>
-</ul>
+<div class="modal-content my-1 p-1">
+    <h3>测试账号</h3>
+    <p>账号：<code class="mr-1">test</code>密码：<code class="mr-1">123456</code><a href="/user/test/mood/1">test的主页</a></p>
+    <p>账号：<code class="mr-1">test1</code>密码：<code>123456</code></p>
+    <p>账号：<code class="mr-1">test2</code>密码：<code>123456</code></p>
+</div>
+<div class="modal-content my-1 p-1">
+    <h3>简介</h3>
+    <p>这个博客的框架采用了<a href="http://koajs.com/" target="_blank">Koa</a>，数据库采用了<a href="https://docs.mongodb.com/manual/" target="_blank">MongoDB</a>，模板引擎用的是<a href="http://mozilla.github.io/nunjucks/templating.html" target="_blank">Nunjucks</a>，前端获取数据采用的是Fetch，聊天室的前后端通信采用的是WebSocket。</p>
+    <p>博客中用了以下npm包：</p>
+    <pre class="bg-faded rounded"><code>
+    {
+      "devDependencies": {
+        "babel-core": "^6.17.0",
+        "babel-preset-stage-3": "^6.17.0",
+        "koa": "^2.0.0",
+        "koa-bodyparser": "^3.2.0",
+        "koa-router": "^7.0.1",
+        "koa-static": "^2.0.0",
+        "mongoose": "^4.6.3",
+        "nunjucks": "2.4.3",
+        "ws": "^1.1.1"
+      },
+      "dependencies": {
+        "marked": "^0.3.6"
+      }
+    }
+    </code></pre>
+</div>
+<div class="modal-content my-1 p-1">
+    <h3>关于：</h3>
+    <p>Repository：<a href="https://github.com/hollowtree/koa-blog">koa-blog</a></p>
+    <p>Github：<a href="https://github.com/hollowtree">hollowtree</a></p>
+</div>
 {% endblock %}

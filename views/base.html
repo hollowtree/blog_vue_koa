@@ -6,16 +6,48 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi"
-        crossorigin="anonymous">
+    <link href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">-->
     <link href="/css/main.css" rel="stylesheet">
     <script src="//cdn.bootcss.com/vue/2.0.3/vue.min.js"></script>
     <!--<script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.js"></script>-->
     {% block head %}{% endblock %}
+
+    <style>
+    </style>
 </head>
 
 <body class="container">
+    <nav class="navbar navbar-light bg-faded mb-1">
+        <a class="navbar-brand" href="/">
+            <img src="/img/logo.png" width="30" height="30" alt="">
+        </a>
+        <a class="navbar-brand" href="#">Blog</a>
+        <ul class="nav navbar-nav">
+            {% if name %}
+            <li class="nav-item">
+                <a class="nav-link" href="/user/{{name}}/mood/1">碎碎念</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/user/{{name}}/log/1">日志</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/chatroom">聊天室</a>
+            </li>
+            <li class="nav-item float-xs-right">
+                <a class="nav-link" href="/logout">{{name}} 退出</a>
+            </li>
+            {% else %}
+            <li class="nav-item float-xs-right">
+                <a class="nav-link" href="/login">登录</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
     {% block connect %}{% endblock %}
+    <nav class="navbar navbar-light bg-faded mt-1 text-xs-center ">
+        <a href="https://github.com/hollowtree">© 2016 hollowtree</a>
+    </nav>
 </body>
 
 </html>

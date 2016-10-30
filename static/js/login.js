@@ -1,4 +1,5 @@
-    var example2 = new Vue({
+(function () {
+    var Login = new Vue({
         el: "#login",
         data: {
             panelin: true,
@@ -16,4 +17,5 @@
 
             }
         }
-    })
+    });
+})();

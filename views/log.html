@@ -1,0 +1,63 @@
+
+
+{% extends "base.html" %} {% block head %} 
+<link rel="stylesheet" href="/css/md.css">
+<link rel="stylesheet" href="/css/log.css">
+{% endblock %} {% block connect %}
+<input type="button" value="显示/隐藏markdown编辑器" class="btn btn-primary btn-sm my-1" id="newLog" />
+<form action="/user/{{name}}/log/{{index}}" method="post" class="my-1" id="logForm">
+    <div class="col-xs-8">
+        <input type="text" name="title" class="form-control" placeholder="标题" id="logTitle" />
+    </div>
+    <input type="submit" value="保存" class="btn btn-primary" />
+    <div id="logBox" class="mt-1">
+        <textarea id="logText" name="logtext" placeholder="请输入..."></textarea>
+        <div id="logShow">
+            <div id="logShowS" class="markdown-body">
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+{% for item in data %}
+<!--{% if loop.index != 11 %}-->
+<!--<div class="show mb-1 pl-1 pt-1">-->
+    <div class="modal-content my-1">
+        <div class="modal-header">
+            <h4>{{item.title}} <small class="text-muted">{{item.createDate.toLocaleString()}}</small>
+            
+            {% if name==item.name %}
+                <input type="button"class="btn btn-sm float-xs-right mr-1 del" data-id="{{item._id}}" value="删除" />
+                <input type="button"class="btn btn-sm float-xs-right mr-1 edit" data-id="{{item._id}}" value="编辑" />
+             {% endif %}
+              </h4>
+        </div>
+        {% if item.logHtml %}
+            <div class="modal-body markdown-body">
+                {{ item.logHtml | safe }}
+            </div>
+        {% endif %}
+        
+</div>
+<!--{% endif %} -->
+{% endfor %}
+
+<p class="clearfix">
+    {% if index==1 %}
+    <a href="#" class="btn btn-primary btn-sm float-xs-left disabled">&larr; Older</a> 
+    {% else %}
+    <a href="/user/{{name}}/mood/{{index - 1 }}" class="btn btn-primary btn-sm float-xs-left">&larr; Older</a> 
+    {% endif %}
+    {% if length!=11 %}
+    <a href="#" class="btn btn-primary btn-sm float-xs-right disabled">Newer &rarr;</a> 
+    {% else %}
+    <a href="/user/{{name}}/mood/{{index + 1 }}" class="btn btn-primary btn-sm float-xs-right">Newer &rarr;</a> {% endif
+    %}
+</p>
+
+<script src="https://unpkg.com/marked@0.3.6"></script>
+<script src="/js/log.js"></script>
+{% endblock %}

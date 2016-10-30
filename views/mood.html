@@ -1,16 +1,16 @@
 {% extends "base.html" %} {% block head %} {% endblock %} {% block connect %}
-<nav class="navbar navbar-light bg-faded mb-1">
+<!--<nav class="navbar navbar-light bg-faded mb-1">
     <a class="navbar-brand" href="#">Blog</a>
     <ul class="nav navbar-nav">
         <li class="nav-item active">
             <a class="nav-link" href="#">碎碎念</a>
         </li>
-        <!--<li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link" href="#">日志</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Gist</a>
-        </li>-->
+        </li>
         {% if name %}
         <li class="nav-item float-xs-right">
             <a class="nav-link" href="/logout">{{name}} 退出</a>
@@ -21,7 +21,7 @@
         </li>
         {% endif %}
     </ul>
-</nav>
+</nav>-->
 
 
 <div>
@@ -34,26 +34,35 @@
 </div>
 {% for item in data %}
 <!--{% if loop.index != 11 %}-->
-<div class="show mb-1 pl-1 pt-1">
-    <!--{{loop.length}} - {{loop.index}}-->
-    <h5>
-        {{item.name}}-{{name}}
-        <small class="text-muted">{{item.createDate.toLocaleString()}}</small> {% if name==item.name %}
-        <button class="btn btn-sm float-xs-right mr-1 del" data-id="{{item._id}}">删除</button> {% endif %}
-    </h5>
-    <p class="mb-0">{{ item.mood }}</p>
+<div class="modal-content my-1">
+    <div class="modal-header">
+        <h5>
+        {{item.name}}
+            <small class="text-muted">{{item.createDate.toLocaleString("chinese",{timeZone: "Asia/Shanghai"})}}</small> 
+            {% if name==item.name %}
+                <input type="button" class="btn btn-sm float-xs-right mr-1 del" data-id="{{item._id}}" value="删除" />
+            {% endif %}
+        </h5>
+    </div>
+    <div class="modal-body">
+        {{ item.mood }}
+    </div>
 </div>
 <!--{% endif %} -->
 {% endfor %}
 
 <p class="clearfix">
     {% if index==1 %}
-    <a href="#" class="btn btn-primary btn-sm float-xs-left disabled">&larr; Older</a> {% else %}
-    <a href="/user/{{name}}/mood/{{index - 1 }}" class="btn btn-primary btn-sm float-xs-left">&larr; Older</a> {% endif %}
+    <a href="#" class="btn btn-primary btn-sm float-xs-left disabled">&larr; Older</a> 
+    {% else %}
+    <a href="/user/{{name}}/mood/{{index - 1 }}" class="btn btn-primary btn-sm float-xs-left">&larr; Older</a> 
+    {% endif %}
     {% if length!=11 %}
-    <a href="#" class="btn btn-primary btn-sm float-xs-right disabled">Newer &rarr;</a> {% else %}
+    <a href="#" class="btn btn-primary btn-sm float-xs-right disabled">Newer &rarr;</a> 
+    {% else %}
     <a href="/user/{{name}}/mood/{{index + 1 }}" class="btn btn-primary btn-sm float-xs-right">Newer &rarr;</a> {% endif
     %}
 </p>
 
-<script src="/js/mood.js"></script> {% endblock %}
+<script src="/js/mood.js"></script> 
+{% endblock %}

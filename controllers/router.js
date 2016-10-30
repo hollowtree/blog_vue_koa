@@ -1,10 +1,18 @@
-var moment = require('moment-timezone');
+var marked = require('marked');
+var crypto = require('crypto');
+
 
 var env = require('./env').env;
 
-var nameModel = require('../models/mname');
-var moodModel = require('../models/mmood');
+var nameModel = require('../models/m-name');
+var moodModel = require('../models/m-mood');
+var logModel = require('../models/m-log');
 
+marked.setOptions({
+  sanitize: true
+});
+var md5 = crypto.createHash('md5');
+//  md5.update(des).digest('hex');
 // 加密
 function enbase(temp) {
     return Buffer.from(JSON.stringify(temp)).toString('base64');
@@ -37,22 +45,13 @@ exports.getLogout = () => {
     }
 }
 
-exports.getJson = () => {
-    return async(ctx, next) => {
-        // console.log(ctx.params.type);
-        // console.log(ctx.params.index);
-        console.log('ctx.requset', ctx.requset);
-
-
-    }
-}
-
 exports.postLogin = () => {
     return async(ctx, next) => {
         console.log('ctx.request.body:\n', ctx.request.body, '\n\n');
         await nameModel.find({
             name: ctx.request.body.name
         }, (err, docs) => {
+            
             if (docs[0].password = ctx.request.body.password) {
                 console.log("password is true");
                 ctx.cookies.set('name', ctx.request.body.name);
@@ -100,7 +99,7 @@ exports.postLogup = () => {
 }
 
 
-// --- dynamic routes --- //
+// --- mood --- //
 exports.getMood = () => {
     return async(ctx, next) => {
         var user = ctx.params.username,
@@ -118,7 +117,6 @@ exports.getMood = () => {
         ).limit(
             11
         ).exec((err, docs) => {
-            console.log('length:', docs.length);
             ctx.body = env.render('mood.html', {
                 name: name,
                 user: user,
@@ -135,15 +133,16 @@ exports.postMood = () => {
     return async(ctx, next) => {
         if (ctx.request.body.mood) {
             var flag = debase(ctx.cookies.get('flag'));
-            console.log(flag);
+            console.log(ctx.request.body);
             await nameModel.find({
                 name: flag.name
             }, (err, docs) => {
                 if (docs[0].salt == flag.salt) {
                     console.log('user ');
+                    var temp = new Date();
                     var moodEntity = new moodModel({
                         name: flag.name,
-                        mood: ctx.request.body.mood
+                        mood: ctx.request.body.mood,
                     });
                     moodEntity.save(() => {
                         console.log("mood saved!");
@@ -151,11 +150,35 @@ exports.postMood = () => {
                 }
             });
         }
-        var name = ctx.params.name,
-            index = parseInt(ctx.params.index);
-        console.log("user", name);
-        await moodModel.find({
-            name: name
+        ctx.redirect(ctx.request.header.referer);
+    }
+}
+
+exports.delMood = () => {
+    return async (ctx, next) => {
+        console.log(ctx.request.header.referer);
+        
+        console.log(ctx.query);
+        await moodModel.find({ _id: ctx.query.id }).exec( (err, docs)=> {
+            if (docs[0]) {
+                docs[0].remove((err) => { console.log(err); });
+            }
+        });
+        ctx.redirect(ctx.request.header.referer);
+    }
+}
+
+
+exports.getLog = () => {
+    return async(ctx, next) => {
+        var user = ctx.params.username,
+            index = parseInt(ctx.params.index),
+            name = ctx.cookies.get('name');
+        console.log('name-----------------', name);
+
+        console.log("user-----------------", user);
+        await logModel.find({
+            name: user
         }).sort({
             createDate: -1
         }).skip(
@@ -164,12 +187,77 @@ exports.postMood = () => {
             11
         ).exec((err, docs) => {
             console.log('length:', docs.length);
-            ctx.body = env.render('mood.html', {
+            ctx.body = env.render('log.html', {
                 name: name,
+                user: user,
                 index: index,
                 length: docs.length,
                 data: docs
             });
         });
+
+    };
+};
+
+exports.postLog = () => {
+    return async (ctx, next) => {
+        if (ctx.request.body.title) {
+            var flag = debase(ctx.cookies.get('flag'));
+            console.log(ctx.request.body);
+            await nameModel.find({
+                name: flag.name
+            }, (err, docs) => {
+                if (docs[0].salt == flag.salt) {
+                    console.log('user ');
+                    var logEntity = new logModel({
+                        name: flag.name,
+                        title:ctx.request.body.title,
+                        log: ctx.request.body.logtext,
+                        logHtml:marked(ctx.request.body.logtext),
+                    });
+                    logEntity.save(() => {
+                        console.log("log saved!");
+                    });
+                }
+            });
+        }
+        ctx.redirect(ctx.request.header.referer);
+    }
+}
+
+exports.editLog = () => {
+    return async (ctx, next) => {
+        console.log(ctx.request.header.referer);
+        console.log(ctx.query);
+        await logModel.find({ _id: ctx.query.id }).exec((err, docs) => {
+            // if (docs[0]) {
+            //     docs[0].remove((err) => { console.log(err); });
+            // };
+            ctx.body = {
+                info: docs[0]
+            }
+        });
+    }
+};
+
+exports.delLog = () => {
+    return async (ctx, next) => {
+        console.log(ctx.request.header.referer);
+        console.log(ctx.query);
+        await logModel.find({ _id: ctx.query.id }).exec((err, docs) => {
+            if (docs[0]) {
+                docs[0].remove((err) => { console.log(err); });
+            }
+        });
+        ctx.redirect(ctx.request.header.referer);
+    }
+};
+
+exports.getChatRoom = () => {
+    return async (ctx, next) => {
+        var name= ctx.cookies.get('name');
+        ctx.body=env.render('chatroom.html',{
+                name: name
+            });
     }
 }

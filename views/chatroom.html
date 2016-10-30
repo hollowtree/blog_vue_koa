@@ -1,0 +1,28 @@
+{% extends "base.html" %} 
+{% block head %} 
+<link rel="stylesheet" href="/css/chatroom.css">
+{% endblock %} 
+{% block connect %}
+<div class="modal-content">
+    <div class="modal-header">
+        <h4>聊天室</h4>
+    </div>
+    <div class="modal-body chatroom-body" id="chatRoomPanel">
+        <div class="modal-content my-1" v-for="meg in megs">
+            <h5 v-text="meg.name"><small v-text="meg.date"></small></h5>
+            <p v-text="meg.message"></p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <form>
+            <div class="col-xs-8 col-sm-9">
+                <input type="text" class="form-control" id="chatMeg" />
+            </div>
+            <div class="col-xs-4 col-sm-3">
+                <input type="button" value="发送" class="btn btn-block btn-primary" id="chatSend" />
+            </div>
+        </form>
+    </div>
+</div>
+<script src="/js/chatroom.js"></script>
+{% endblock %} 
