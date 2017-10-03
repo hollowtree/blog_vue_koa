@@ -14,6 +14,7 @@
         "lint": "eslint --ext .js,.vue src client/test/unit/specs client/test/e2e/specs"
     },
     "dependencies": {
+        "axios": "^0.16.2",
         "koa": "^2.3.0",
         "koa-bodyparser": "^4.2.0",
         "koa-router": "^7.2.1",
