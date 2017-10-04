@@ -26,6 +26,7 @@ module.exports = {
         "indent": ["error", 4],
         "eol-last": 0,
         "space-before-function-paren": ["error", "never"],
-        "no-multiple-empty-lines": 0
+        "no-multiple-empty-lines": 0,
+        "padded-blocks": 0
     }
 }

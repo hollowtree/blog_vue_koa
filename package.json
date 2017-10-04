@@ -6,7 +6,7 @@
     "private": true,
     "scripts": {
         "client": "node client/build/dev-server.js",
-        "server": "nodemon server/app.js",
+        "server": "nodemon server/app.js --watch server",
         "build": "node client/build/build.js",
         "unit": "cross-env BABEL_ENV=test karma start client/test/unit/karma.conf.js --single-run",
         "e2e": "node client/test/e2e/runner.js",
