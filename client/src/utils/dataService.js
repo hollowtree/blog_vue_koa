@@ -17,7 +17,25 @@ let get = (api, options) => {
         }
     })
 }
+let post = (api, options) => {
+    options = options || {}
+    let params = options.params || {}
+    axios.post(prefix + api, {
+        params: params
+    }).then((res) => {
+        if (res.data.code === 0) {
+            params.callback0 && params.callback0(res)
+        }
+        if (res.data.code === 1001) {
+            params.callback1001 && params.callback1001(res)
+        }
+    })
+}
 
 exports.getTemp = (options) => {
     return get('api/temp', options)
+}
+
+exports.postArticle = (options) => {
+    return post('api/post_article', options)
 }

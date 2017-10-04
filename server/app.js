@@ -1,5 +1,5 @@
 const BodyParser = require('koa-bodyparser')
-const Cookies = require('cookies')
+// const Cookies = require('cookies')
 const Koa = require('koa')
 const KoaRouter = require('koa-router')()
 const KoaStatic = require('koa-static')
@@ -26,10 +26,10 @@ app.use(async (ctx, next) => {
 app.use(BodyParser())
 
 KoaRouter.get('/v1/api/temp', routerController.getTemp())
-// KoaRouter.post('/api/sign_up', routerController.signUp())
-// KoaRouter.post('/api/send_status', routerController.sendStatus())
+KoaRouter.post('/v1/api/post_article', routerController.postArticle())
 app.use(KoaRouter.routes())
 
 const server = app.listen(4000, function () {
     console.log('Server running on http://localhost:4000/')
+    console.log(`This process's pid is ${process.pid}`);
 })
