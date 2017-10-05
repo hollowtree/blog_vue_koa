@@ -19,6 +19,8 @@
         "koa-bodyparser": "^4.2.0",
         "koa-router": "^7.2.1",
         "koa-static": "^4.0.1",
+        "less": "^2.7.2",
+        "less-loader": "^4.0.5",
         "mongoose": "^4.11.14",
         "nodemon": "^1.12.1",
         "showdown": "^1.7.5",

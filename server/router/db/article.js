@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/blog', {
-    promiseLibrary: global.Promise
+    // promiseLibrary: global.Promise
 })
 
 const articleSchema = mongoose.Schema({

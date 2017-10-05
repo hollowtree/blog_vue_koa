@@ -17,7 +17,7 @@ exports.postArticle = () => {
         console.log(ctx.request.body.params.content)
         let article = new postArticleModel({
             content: ctx.request.body.params.content,
-            author: 'Tr5656ee'
+            author: 'hollowtree'
         })
         await article.save(function (err, article) {
             if (err) {
@@ -36,21 +36,19 @@ exports.postArticle = () => {
 
 exports.getArticle = () => {
     return async (ctx, next) => {
-        await postArticleModel.find(function (err, articles) {
-            var data = []
-            articles.forEach(function (val, i, arr) {
-                data.push({
-                    createdAt: val.createdAt,
-                    author: val.author,
-                    content: val.content,
-                })
-
+        const articles = await postArticleModel.find(function (err, articles) { })
+        let data = []
+        articles.forEach(function (val) {
+            data.push({
+                createdAt: val.createdAt,
+                author: val.author,
+                content: val.content,
             })
-            ctx.body = {
-                code: 0,
-                data: data
-            }
         })
+        ctx.body = {
+            code: 0,
+            data: data
+        }
     }
 
 }
