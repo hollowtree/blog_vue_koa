@@ -26,6 +26,7 @@ app.use(async (ctx, next) => {
 app.use(BodyParser())
 
 KoaRouter.get('/v1/api/temp', routerController.getTemp())
+KoaRouter.get('/v1/api/get_article', routerController.getArticle())
 KoaRouter.post('/v1/api/post_article', routerController.postArticle())
 app.use(KoaRouter.routes())
 

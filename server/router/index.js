@@ -1,10 +1,13 @@
-const postArticleModel = require('./db/postArticle')
+const postArticleModel = require('./db/article')
 
 exports.getTemp = () => {
     return async (ctx, next) => {
         console.log(ctx.query)
         ctx.body = {
-            title: '登录 / 注册'
+            data: {
+                title: '登录 / 注册'
+            },
+            code: 0
         };
     };
 };
@@ -29,4 +32,25 @@ exports.postArticle = () => {
             }
         })
     }
+}
+
+exports.getArticle = () => {
+    return async (ctx, next) => {
+        await postArticleModel.find(function (err, articles) {
+            var data = []
+            articles.forEach(function (val, i, arr) {
+                data.push({
+                    createdAt: val.createdAt,
+                    author: val.author,
+                    content: val.content,
+                })
+
+            })
+            ctx.body = {
+                code: 0,
+                data: data
+            }
+        })
+    }
+
 }

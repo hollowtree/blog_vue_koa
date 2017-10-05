@@ -4,9 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+import showdown from 'showdown'
 import dataService from './utils/dataService'
 Vue.config.productionTip = false
 
+Vue.prototype.converter = new showdown.Converter()
 Vue.prototype.dataService = dataService
 
 /* eslint-disable no-new */

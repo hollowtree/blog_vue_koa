@@ -1,8 +1,10 @@
 <template>
     <div class="hello">
-        <h1>{{ msg }}</h1>
-        <h2>Essential Links</h2>
-        
+        <textarea v-model="article"></textarea>
+        <button @click="postArticle">提交</button>
+        <template v-for="(item,index) in articles">
+            <div :key="index" v-html="converter.makeHtml(item.content)"></div>
+        </template>
     </div>
 </template>
 
@@ -11,7 +13,27 @@ export default {
     name: 'hello',
     data() {
         return {
-            msg: 'Welcome to Your Vue.js App'
+            article: '6789',
+            articles: []
+        }
+    },
+    created() {
+        this.dataService.getArticle({
+            callback0: (data) => {
+                console.log(data)
+                this.articles = data
+            }
+        })
+    },
+    methods: {
+        postArticle: function() {
+            this.dataService.postArticle({
+                page: 1,
+                params: {
+                    content: this.article,
+                    page: 1
+                }
+            })
         }
     }
 }

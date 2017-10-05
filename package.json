@@ -21,6 +21,7 @@
         "koa-static": "^4.0.1",
         "mongoose": "^4.11.14",
         "nodemon": "^1.12.1",
+        "showdown": "^1.7.5",
         "vue": "^2.4.2",
         "vue-router": "^2.7.0"
     },

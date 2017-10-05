@@ -10,10 +10,10 @@ let get = (api, options) => {
         params: params
     }).then((res) => {
         if (res.data.code === 0) {
-            params.callback0 && params.callback0(res)
+            options.callback0 && options.callback0(res.data.data)
         }
         if (res.data.code === 1001) {
-            params.callback1001 && params.callback1001(res)
+            options.callback1001 && options.callback1001(res.data.data)
         }
     })
 }
@@ -24,10 +24,10 @@ let post = (api, options) => {
         params: params
     }).then((res) => {
         if (res.data.code === 0) {
-            params.callback0 && params.callback0(res)
+            options.callback0 && options.callback0(res.data.data)
         }
         if (res.data.code === 1001) {
-            params.callback1001 && params.callback1001(res)
+            options.callback1001 && options.callback1001(res.data.data)
         }
     })
 }
@@ -35,7 +35,9 @@ let post = (api, options) => {
 exports.getTemp = (options) => {
     return get('api/temp', options)
 }
-
+exports.getArticle = (options) => {
+    return get('api/get_article', options)
+}
 exports.postArticle = (options) => {
     return post('api/post_article', options)
 }

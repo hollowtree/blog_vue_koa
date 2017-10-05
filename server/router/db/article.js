@@ -4,11 +4,13 @@ mongoose.connect('mongodb://localhost/blog', {
 })
 
 const articleSchema = mongoose.Schema({
+    title: String,
     content: String,
+    tags: String,
     author: String
 }, {
         timestamps: {
-            createdAt: 'created_at'
+            // createdAt: 'created_at'
         }
     })
 
