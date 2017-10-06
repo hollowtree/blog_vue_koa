@@ -16,6 +16,7 @@ exports.postArticle = () => {
     return async (ctx, next) => {
         console.log(ctx.request.body.params.content)
         let article = new postArticleModel({
+            title: ctx.request.body.params.title,
             content: ctx.request.body.params.content,
             author: 'hollowtree'
         })
@@ -42,6 +43,7 @@ exports.getArticle = () => {
             data.push({
                 createdAt: val.createdAt,
                 author: val.author,
+                title: val.title,
                 content: val.content,
             })
         })
