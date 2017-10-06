@@ -11,6 +11,14 @@ Vue.config.productionTip = false
 Vue.prototype.converter = new showdown.Converter()
 Vue.prototype.dataService = dataService
 
+// Vue.prototype.converter.setOption('noHeaderId', true)
+// Vue.prototype.converter.setOption('headerLevelStart', 2)
+// Vue.prototype.converter.setOption('tables', true)
+// Vue.prototype.converter.setOption('tasklists', true)
+// Vue.prototype.converter.setOption('simpleLineBreaks', true)
+// Vue.prototype.converter.setOption('openLinksInNewWindow', true)
+Vue.prototype.converter.setFlavor('github')
+
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
