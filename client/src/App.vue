@@ -2,7 +2,6 @@
     <div id="app">
 
         <navigation-bar></navigation-bar>
-        <Editor v-if="$store.state.showEditor"></Editor>
         <router-view>
         </router-view>
     </div>
@@ -10,20 +9,18 @@
 
 <script>
 import NavigationBar from '@/components/NavigationBar'
-import Editor from '@/components/Editor'
 
 export default {
     name: 'app',
     created() {
     },
     components: {
-        NavigationBar,
-        Editor
+        NavigationBar
     }
 }
 </script>
 
-<style>
+<style lang="less">
 #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -35,11 +32,17 @@ export default {
 
 button {
     padding: 2px 5px;
+    margin-right: 3px;
     background: #eee;
     border: none;
     outline: none;
     border-radius: 4px;
     min-height: 30px;
     min-width: 80px;
+    cursor: pointer;
+    &.small {
+        min-height: 24px;
+        min-width: 60px;
+    }
 }
 </style>

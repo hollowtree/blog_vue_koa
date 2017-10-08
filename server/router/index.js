@@ -1,4 +1,4 @@
-const postArticleModel = require('./db/article')
+const ArticleModel = require('./db/article')
 
 exports.getTemp = () => {
     return async (ctx, next) => {
@@ -12,10 +12,32 @@ exports.getTemp = () => {
     };
 };
 
+exports.getArticle = () => {
+    return async (ctx, next) => {
+        const articles = await ArticleModel.find(function (err, articles) { })
+        let data = []
+        articles.forEach(function (val) {
+            if (val.kind !== 1) return
+            data.push({
+                createdAt: val.createdAt,
+                author: val.author,
+                title: val.title,
+                content: val.content,
+                id: val.id
+            })
+        })
+        ctx.body = {
+            code: 0,
+            data: data
+        }
+    }
+
+}
+
 exports.postArticle = () => {
     return async (ctx, next) => {
         console.log(ctx.request.body.params.content)
-        let article = new postArticleModel({
+        let article = new ArticleModel({
             title: ctx.request.body.params.title,
             content: ctx.request.body.params.content,
             author: 'hollowtree'
@@ -34,23 +56,11 @@ exports.postArticle = () => {
         })
     }
 }
-
-exports.getArticle = () => {
+exports.deleteArticle = () => {
     return async (ctx, next) => {
-        const articles = await postArticleModel.find(function (err, articles) { })
-        let data = []
-        articles.forEach(function (val) {
-            data.push({
-                createdAt: val.createdAt,
-                author: val.author,
-                title: val.title,
-                content: val.content,
-            })
-        })
+        await ArticleModel.findByIdAndUpdate(ctx.request.query.id, { kind: 0 })
         ctx.body = {
-            code: 0,
-            data: data
+            code: 0
         }
     }
-
 }

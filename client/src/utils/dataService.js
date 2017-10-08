@@ -31,6 +31,20 @@ let post = (api, options) => {
         }
     })
 }
+let del = (api, options) => {
+    options = options || {}
+    let params = options.params || {}
+    axios.delete(prefix + api, {
+        params: params
+    }).then((res) => {
+        if (res.data.code === 0) {
+            options.callback0 && options.callback0(res.data.data)
+        }
+        if (res.data.code === 1001) {
+            options.callback1001 && options.callback1001(res.data.data)
+        }
+    })
+}
 
 exports.getTemp = (options) => {
     return get('api/temp', options)
@@ -40,4 +54,8 @@ exports.getArticle = (options) => {
 }
 exports.postArticle = (options) => {
     return post('api/post_article', options)
+}
+
+exports.deleteArticle = (options) => {
+    return del('api/delete_article', options)
 }

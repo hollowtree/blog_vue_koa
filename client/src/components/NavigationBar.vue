@@ -9,7 +9,7 @@
 export default {
     methods: {
         showEditor: function() {
-            this.$store.state.showEditor = true
+            this.$store.state.editor.show = 'article'
         }
     }
 }

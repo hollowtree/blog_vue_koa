@@ -1,17 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-// import data from './modules/data'
+import editor from './modules/editor'
 
 Vue.use(Vuex)
-console.log()
-
 
 export default new Vuex.Store({
-    state: {
-        showEditor: false
+    modules: {
+        editor
     }
-    // modules: {
-    //     data
-    // }
 })

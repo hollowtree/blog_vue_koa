@@ -28,6 +28,7 @@ app.use(BodyParser())
 KoaRouter.get('/v1/api/temp', routerController.getTemp())
 KoaRouter.get('/v1/api/get_article', routerController.getArticle())
 KoaRouter.post('/v1/api/post_article', routerController.postArticle())
+KoaRouter.delete('/v1/api/delete_article', routerController.deleteArticle())
 app.use(KoaRouter.routes())
 
 const server = app.listen(4000, function () {
