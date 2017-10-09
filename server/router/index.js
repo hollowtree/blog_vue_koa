@@ -42,18 +42,28 @@ exports.postArticle = () => {
             content: ctx.request.body.params.content,
             author: 'hollowtree'
         })
-        await article.save(function (err, article) {
-            if (err) {
-                console.error(err)
-                ctx.body = {
-                    code: 500
-                }
-            }
-            article.success()
+        if (ctx.request.body.params.id) {
+            await ArticleModel.findByIdAndUpdate(ctx.request.body.params.id, {
+                title: ctx.request.body.params.title,
+                content: ctx.request.body.params.content,
+            })
             ctx.body = {
                 code: 0
             }
-        })
+        } else {
+            await article.save(function (err, article) {
+                if (err) {
+                    console.error(err)
+                    ctx.body = {
+                        code: 500
+                    }
+                }
+                article.success()
+                ctx.body = {
+                    code: 0
+                }
+            })
+        }
     }
 }
 exports.deleteArticle = () => {
