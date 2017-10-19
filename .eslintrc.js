@@ -28,6 +28,7 @@ module.exports = {
         "space-before-function-paren": ["error", "never"],
         "no-multiple-empty-lines": 0,
         "padded-blocks": 0,
-        "no-multi-str": 0
+        "no-multi-str": 0,
+        "space-before-function-paren": 0
     }
 }
