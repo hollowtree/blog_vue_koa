@@ -25,6 +25,10 @@ app.use(async (ctx, next) => {
 // app.use(KoaStatic('./temp/'))
 app.use(BodyParser())
 
+KoaRouter.post('/v1/api/sign_up', routerController.signUp())
+KoaRouter.post('/v1/api/log_in', routerController.logIn())
+
+
 KoaRouter.get('/v1/api/temp', routerController.getTemp())
 KoaRouter.get('/v1/api/get_article', routerController.getArticle())
 KoaRouter.post('/v1/api/post_article', routerController.postArticle())

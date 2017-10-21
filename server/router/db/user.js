@@ -5,7 +5,8 @@ const userSchema = mongoose.Schema({
     username: String,
     email: String,
     userId: String,
-    password: String
+    passwd: String,
+    token: String
 }, {
         timestamps: {
         }

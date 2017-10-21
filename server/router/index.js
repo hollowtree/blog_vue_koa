@@ -1,4 +1,6 @@
+const crypto = require('crypto');
 const ArticleModel = require('./db/article')
+const UserModel = require('./db/user')
 
 exports.getTemp = () => {
     return async (ctx, next) => {
@@ -11,6 +13,60 @@ exports.getTemp = () => {
         };
     };
 };
+
+exports.signUp = () => {
+    return async (ctx, next) => {
+        console.log(ctx.request.body.params.content)
+        const cryptoPasswd = crypto.createHmac('sha512', ctx.request.body.params.passwd).digest('hex')
+        let user = new UserModel({
+            username: ctx.request.body.params.username,
+            email: ctx.request.body.params.email,
+            passwd: cryptoPasswd
+        })
+        await user.save(function (err, user) {
+            if (err) {
+                console.error(err)
+                ctx.body = {
+                    code: 500
+                }
+            }
+            user.success()
+            ctx.body = {
+                code: 0
+            }
+        })
+    }
+}
+
+exports.logIn = () => {
+    return async (ctx, next) => {
+        const cryptoPasswd = crypto.createHmac('sha512', ctx.request.body.params.passwd).digest('hex')
+        const token = crypto.createHmac('sha1', ctx.request.body.params.email + cryptoPasswd.slice(0, 10) + (new Date()).getTime()).digest('hex')
+        console.log(token)
+
+        let userInfo = await UserModel.where({
+            email: ctx.request.body.params.email,
+            passwd: cryptoPasswd
+        }).findOne().update({}, { $set: { token: token } })
+        console.log(userInfo)
+
+        if (userInfo && userInfo.passwd === cryptoPasswd) {
+            ctx.cookies.set('token', token)
+            ctx.body = {
+                code: 0
+            }
+        } else {
+            ctx.body = {
+                code: 1001,
+                data: {
+                    meg: 'something is wrong'
+                }
+            }
+        }
+
+
+    }
+}
 
 exports.getArticle = () => {
     return async (ctx, next) => {
