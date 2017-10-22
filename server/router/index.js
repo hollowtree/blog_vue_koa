@@ -41,17 +41,19 @@ exports.signUp = () => {
 exports.logIn = () => {
     return async (ctx, next) => {
         const cryptoPasswd = crypto.createHmac('sha512', ctx.request.body.params.passwd).digest('hex')
-        const token = crypto.createHmac('sha1', ctx.request.body.params.email + cryptoPasswd.slice(0, 10) + (new Date()).getTime()).digest('hex')
-        console.log(token)
-
         let userInfo = await UserModel.where({
             email: ctx.request.body.params.email,
             passwd: cryptoPasswd
-        }).findOne().update({}, { $set: { token: token } })
-        console.log(userInfo)
-
+        }).findOne().exec()
         if (userInfo && userInfo.passwd === cryptoPasswd) {
-            ctx.cookies.set('token', token)
+            let updatedTime = userInfo.updatedAt.getTime(),
+                now = (new Date()).getTime()
+            if (now - updatedTime > 1000 * 3600 * 12 && now - updatedTime < 1000 * 3600 * 48) {
+                const token = crypto.createHmac('sha1', ctx.request.body.params.email + cryptoPasswd.slice(0, 10) + (new Date()).getTime()).digest('hex')
+                userInfo.token = token
+                userInfo.save()
+                ctx.cookies.set('token', token)
+            }
             ctx.body = {
                 code: 0
             }
