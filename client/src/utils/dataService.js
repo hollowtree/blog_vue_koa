@@ -46,6 +46,14 @@ let del = (api, options) => {
     })
 }
 
+exports.postSignUp = (options) => {
+    return post('api/sign_up', options)
+}
+
+exports.postLogIn = (options) => {
+    return post('api/log_in', options)
+}
+
 exports.getTemp = (options) => {
     return get('api/temp', options)
 }
