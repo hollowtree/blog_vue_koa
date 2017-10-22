@@ -22,7 +22,7 @@ app.use(async (ctx, next) => {
     await next()
 })
 
-// app.use(KoaStatic('./temp/'))
+app.use(KoaStatic(__dirname + '/dist/'))
 app.use(BodyParser())
 
 KoaRouter.post('/v1/api/sign_up', routerController.signUp())
