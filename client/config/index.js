@@ -1,14 +1,16 @@
+'use strict'
 // see http://vuejs-templates.github.io/webpack for documentation.
-var path = require('path')
+const path = require('path')
 
 module.exports = {
     build: {
-        env: require('./prod.env'),
         index: path.resolve(__dirname, '../../server/dist/index.html'),
         assetsRoot: path.resolve(__dirname, '../../server/dist'),
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         productionSourceMap: true,
+        // https://webpack.js.org/configuration/devtool/#production
+        devtool: '#source-map',
         // Gzip off by default as many popular static hosts such as
         // Surge or Netlify already gzip all static assets for you.
         // Before setting to `true`, make sure to:
@@ -22,9 +24,12 @@ module.exports = {
         bundleAnalyzerReport: process.env.npm_config_report
     },
     dev: {
-        env: require('./dev.env'),
-        port: 8080,
+        host: 'localhost', // can be overwritten by process.env.HOST
+        port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
         autoOpenBrowser: true,
+        errorOverlay: true,
+        notifyOnErrors: true,
+        poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         proxyTable: {
@@ -36,6 +41,23 @@ module.exports = {
                 }
             }
         },
+
+        // Use Eslint Loader?
+        // If true, your code will be linted during bundling and
+        // linting errors and warnings will be shown in the console.
+        useEslint: true,
+        // If true, eslint errors and warnings will also be shown in the error overlay
+        // in the browser.
+        showEslintErrorsInOverlay: false,
+
+        // https://webpack.js.org/configuration/devtool/#development
+        devtool: 'eval-source-map',
+
+        // If you have problems debugging vue-files in devtools,
+        // set this to false - it *may* help
+        // https://vue-loader.vuejs.org/en/options.html#cachebusting
+        cacheBusting: true,
+
         // CSS Sourcemaps off by default because relative paths are "buggy"
         // with this option, according to the CSS-Loader README
         // (https://github.com/webpack/css-loader#sourcemaps)
