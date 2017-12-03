@@ -171,6 +171,17 @@ exports.postArticle = () => {
 }
 exports.deleteArticle = () => {
     return async (ctx, next) => {
+        const isUser = await checkToken(ctx)
+        if (!isUser) {
+            ctx.body = {
+                code: 0,
+                data: {
+                    code: 0,
+                    msg: 'user error'
+                }
+            }
+            return
+        }
         await ArticleModel.findByIdAndUpdate(ctx.request.query.id, { kind: 0 })
         ctx.body = {
             code: 0
