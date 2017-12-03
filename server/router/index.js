@@ -2,6 +2,15 @@ const crypto = require('crypto');
 const ArticleModel = require('./db/article')
 const UserModel = require('./db/user')
 
+const checkToken = async (ctx) => {
+    const token = ctx.cookies.get('token')
+    const user = await UserModel.where({ token: token }).findOne()
+    if (user) {
+        return true
+    }
+    return
+}
+
 exports.getTemp = () => {
     return async (ctx, next) => {
         console.log(ctx.query)
@@ -47,19 +56,40 @@ exports.logIn = () => {
         }).findOne().exec()
         if (userInfo && userInfo.passwd === cryptoPasswd) {
             let updatedTime = userInfo.updatedAt.getTime(),
-                now = (new Date()).getTime()
-            if (now - updatedTime > 1000 * 3600 * 12 && now - updatedTime < 1000 * 3600 * 48) {
+                now = (new Date()).getTime(),
+                token = ctx.cookies.get('token')
+
+            if (now - updatedTime > 1000 * 3600 * 12) {
                 const token = crypto.createHmac('sha1', ctx.request.body.params.email + cryptoPasswd.slice(0, 10) + (new Date()).getTime()).digest('hex')
                 userInfo.token = token
                 userInfo.save()
+                process.env.token = token;
                 ctx.cookies.set('token', token)
-            }
-            ctx.body = {
-                code: 0
+                ctx.body = {
+                    code: 0,
+                    data: {
+                        code: 0
+                    }
+                }
+            } else if (!token) {
+                ctx.cookies.set('token', userInfo.token)
+                ctx.body = {
+                    code: 0,
+                    data: {
+                        code: 0
+                    }
+                }
+            } else {
+                ctx.body = {
+                    code: 0,
+                    data: {
+                        code: 0
+                    }
+                }
             }
         } else {
             ctx.body = {
-                code: 1001,
+                code: 0,
                 data: {
                     meg: 'something is wrong'
                 }
@@ -94,7 +124,17 @@ exports.getArticle = () => {
 
 exports.postArticle = () => {
     return async (ctx, next) => {
-        console.log(ctx.request.body.params.content)
+        const isUser = await checkToken(ctx)
+        if (!isUser) {
+            ctx.body = {
+                code: 0,
+                data: {
+                    code: 0,
+                    msg: 'user error'
+                }
+            }
+            return
+        }
         let article = new ArticleModel({
             title: ctx.request.body.params.title,
             content: ctx.request.body.params.content,
