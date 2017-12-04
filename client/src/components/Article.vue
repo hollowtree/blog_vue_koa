@@ -5,6 +5,7 @@
         <section>
             <article v-for="(item,index) in articles" :key="index" class="article">
                 <h2 v-if="item.title">{{item.title}}</h2>
+                <p class="date" v-html="formatDate(item.createdAt)"></p>
                 <div v-html="converter.makeHtml(item.content)">
                 </div>
                 <p v-if="item.id">
@@ -60,6 +61,15 @@ export default {
                     this.$store.state.editor.data = {}
                 }
             })
+        },
+        formatDate(date) {
+            return new Date(date).toLocaleTimeString('chinese', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour12: false,
+                formatMatcher: 'basic'
+            })
         }
     }
 }
@@ -97,6 +107,18 @@ export default {
 .article {
   margin: 30px 0;
   border-bottom: 2px dashed #eee;
+  .date {
+    color: #999;
+    font-size: 14px;
+  }
+}
+pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f6f8fa;
+  border-radius: 3px;
 }
 </style>
 
