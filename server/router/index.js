@@ -63,7 +63,7 @@ exports.logIn = () => {
                 const token = crypto.createHmac('sha1', ctx.request.body.params.email + cryptoPasswd.slice(0, 10) + (new Date()).getTime()).digest('hex')
                 userInfo.token = token
                 userInfo.save()
-                ctx.cookies.set('token', token)
+                ctx.cookies.set('token', token), { httpOnly: false }
                 ctx.body = {
                     code: 0,
                     data: {
@@ -77,7 +77,7 @@ exports.logIn = () => {
                     userInfo.token = token
                     userInfo.save()
                 }
-                ctx.cookies.set('token', token)
+                ctx.cookies.set('token', token, { httpOnly: false })
                 ctx.body = {
                     code: 0,
                     data: {

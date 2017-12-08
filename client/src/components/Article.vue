@@ -8,7 +8,7 @@
                 <p class="date" v-html="formatDate(item.createdAt)"></p>
                 <div v-html="converter.makeHtml(item.content)">
                 </div>
-                <p v-if="item.id">
+                <p v-if="item.id && $store.state.data.isOwner">
                     <button class="small" @click="editArticle(item)">编辑</button>
                     <button class="small" @click="deleteArticle(item.id)">删除</button>
                 </p>
@@ -35,7 +35,7 @@ export default {
     created() {
         this.dataService.getArticle({
             callback0: (data) => {
-                console.log(data)
+                // console.log(data)
                 this.articles = data
             }
         })

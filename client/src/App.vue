@@ -10,6 +10,10 @@
 export default {
     name: 'app',
     created() {
+        console.log(document.cookie)
+        if (/token/.test(document.cookie)) {
+            this.$store.state.data.isOwner = true
+        }
     },
     components: {
     }

@@ -1,5 +1,5 @@
 const state = {
-    temp: 42
+    isOwner: false
 }
 export default {
     state

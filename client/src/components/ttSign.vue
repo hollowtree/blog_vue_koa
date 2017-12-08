@@ -2,7 +2,7 @@
     <div class="sign">
         <div v-if="this.show == 'login'">
             <p><input type="text" placeholder="Email:" v-model="logIn.email"></p>
-            <p><input type="text" placeholder="Password:" v-model="logIn.passwd"></p>
+            <p><input type="password" placeholder="Password:" v-model="logIn.passwd"></p>
             <p>
                 <button @click="postLogIn">登录</button>
             </p>
@@ -81,9 +81,13 @@ export default {
                     email: this.logIn.email,
                     passwd: this.logIn.passwd
                 },
-                callback0: () => {
+                callback0: (data) => {
                     this.$store.state.editor.show = ''
                     this.$store.state.editor.data = {}
+                    if (data.code === 0) {
+                        this.$router.push('/')
+                        this.$store.state.data.isOwner = true
+                    }
                 }
             })
         }
