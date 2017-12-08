@@ -107,7 +107,7 @@ exports.logIn = () => {
 
 exports.getArticle = () => {
     return async (ctx, next) => {
-        const articles = await ArticleModel.find(function (err, articles) { })
+        const articles = await ArticleModel.find({}).sort({ 'createdAt': -1 })
         let data = []
         articles.forEach(function (val) {
             if (val.kind !== 1) return
