@@ -7,6 +7,9 @@ import store from './store'
 
 import showdown from 'showdown'
 import dataService from './utils/dataService'
+import hljs from './utils/hljs/'
+import './utils/hljs/styles.js'
+
 Vue.config.productionTip = false
 
 Vue.prototype.converter = new showdown.Converter()
@@ -19,6 +22,9 @@ Vue.prototype.converter.setOption('tasklists', true)
 Vue.prototype.converter.setOption('simpleLineBreaks', true)
 Vue.prototype.converter.setOption('openLinksInNewWindow', true)
 // Vue.prototype.converter.setFlavor('github')
+
+
+Vue.use(hljs)
 
 /* eslint-disable no-new */
 new Vue({

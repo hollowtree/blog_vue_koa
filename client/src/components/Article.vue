@@ -3,7 +3,7 @@
         <article-editor></article-editor>
         <navigation-bar></navigation-bar>
         <section>
-            <article v-for="(item,index) in articles" :key="index" class="article">
+            <article v-highlight v-for="(item,index) in articles" :key="index" class="article">
                 <h2 v-if="item.title">{{item.title}}</h2>
                 <p class="date" v-html="formatDate(item.createdAt)"></p>
                 <div v-html="converter.makeHtml(item.content)">
