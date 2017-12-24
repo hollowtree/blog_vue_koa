@@ -106,18 +106,19 @@ export default {
 
 .article {
   margin: 30px 0;
-  border-bottom: 2px dashed #eee;
+  border-bottom: 2px dashed #333;
   .date {
-    color: #999;
+    color: #ccc;
     font-size: 14px;
   }
 }
 pre {
   padding: 16px;
-  overflow: auto;
   font-size: 85%;
   line-height: 1.45;
-  background-color: #f6f8fa;
+  //   background-color: #f6f8fa;
+  //   background-color: rgba(246, 248, 250, 0.4);
+  background-color: #222;
   border-radius: 3px;
 }
 </style>
