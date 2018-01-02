@@ -110,6 +110,8 @@ export default {
   .date {
     color: #ccc;
     font-size: 14px;
+    font-weight: 300;
+    font-style: italic;
   }
 }
 pre {
