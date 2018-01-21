@@ -12,7 +12,7 @@ export default {
     name: 'app',
     created() {
         console.log(document.cookie)
-        if (/token/.test(document.cookie)) {
+        if (localStorage.getItem('isOwner')) {
             this.$store.state.data.isOwner = true
         }
     },
@@ -58,5 +58,13 @@ canvas {
   left: 0;
   top: 0;
   pointer-events: none;
+}
+.clearfix {
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 }
 </style>
