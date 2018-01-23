@@ -37,7 +37,10 @@ export default {
   top: 0;
   left: 0;
   right: 0;
-  background: #222;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.25)
+  );
   ul {
     width: 80%;
     margin: 0 auto;

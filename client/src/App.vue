@@ -2,10 +2,12 @@
     <div id="app">
         <router-view>
         </router-view>
+        <bg-tree></bg-tree>
     </div>
 </template>
 
 <script>
+import bgTree from './components/bg/bgTree'
 export default {
     name: 'app',
     created() {
@@ -15,20 +17,17 @@ export default {
         }
     },
     components: {
+        bgTree
     }
 }
 </script>
 
 <style lang="less">
-body {
-  background: #111;
-}
 #app {
   font-family: "Lato", "Avenir", Helvetica, "Microsoft YaHei", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   //   color: #2c3e50;
-  color: #aaa;
   margin: 60px auto;
   width: 80%;
 }
