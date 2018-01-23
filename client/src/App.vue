@@ -2,12 +2,10 @@
     <div id="app">
         <router-view>
         </router-view>
-        <canvas id="canvas"></canvas>
     </div>
 </template>
 
 <script>
-import snow from './utils/snow'
 export default {
     name: 'app',
     created() {
@@ -15,9 +13,6 @@ export default {
         if (localStorage.getItem('isOwner')) {
             this.$store.state.data.isOwner = true
         }
-    },
-    mounted() {
-        snow()
     },
     components: {
     }
@@ -53,12 +48,7 @@ button {
     min-width: 60px;
   }
 }
-canvas {
-  position: fixed;
-  left: 0;
-  top: 0;
-  pointer-events: none;
-}
+
 .clearfix {
   &:before,
   &:after {
