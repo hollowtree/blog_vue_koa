@@ -216,18 +216,18 @@ export default {
             this.musicTitle = item.title // + ' - ' + item.singer
             this.play = true
             setTimeout(() => {
-                let el = document.getElementById('htMusic')
+                const el = document.getElementById('htMusic')
                 el.currentTime = 0
                 el.play()
                 this.updateTime()
             }, 0)
         },
         updateTime() {
-            let el = document.getElementById('htMusic')
-            let currentTime = el.currentTime
-            let duration = el.duration
+            const el = document.getElementById('htMusic')
+            const currentTime = el.currentTime
+            const duration = el.duration
 
-            this.musicTime = this.formatTime(currentTime) + '/' + this.formatTime(duration)
+            this.musicTime = `${this.formatTime(currentTime)}/${this.formatTime(duration)}`
             if (duration) {
                 this.progress = currentTime * 100 / duration
             } else {
@@ -240,12 +240,12 @@ export default {
             }
         },
         formatTime(val) {
-            let mm = Math.floor(val / 60) || 0
-            let ss = Math.floor(val % 60) || 0
-            return (mm < 10 ? '0' + mm : mm) + ':' + (ss < 10 ? '0' + ss : ss)
+            const mm = Math.floor(val / 60) || 0
+            const ss = Math.floor(val % 60) || 0
+            return `${mm < 10 ? `0${mm}` : mm}:${ss < 10 ? `0${ss}` : ss}`
         },
         playOrPause() {
-            let el = document.getElementById('htMusic')
+            const el = document.getElementById('htMusic')
             if (!this.audioSrc) {
                 this.startPlay()
                 return

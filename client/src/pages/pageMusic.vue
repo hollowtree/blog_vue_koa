@@ -20,14 +20,14 @@ export default {
         }
     },
     created() {
-        fetch('/static/data/music.json').then(res => {
-            return res.json()
-        }).then(data => {
-            data.forEach(val => {
-                val.audioSrc = 'http://music.smalltree.me/' + val.file_name + '.mp3'
+        fetch('/static/data/music.json')
+            .then(res => res.json())
+            .then(data => {
+                data.forEach(val => {
+                    val.audioSrc = `http://music.smalltree.me/${val.file_name}.mp3`
+                })
+                this.musicList = data
             })
-            this.musicList = data
-        })
     }
 }
 </script>

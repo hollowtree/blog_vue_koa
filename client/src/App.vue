@@ -11,7 +11,7 @@ import bgTree from './components/bg/bgTree'
 export default {
     name: 'app',
     created() {
-        console.log(document.cookie)
+        // console.log(document.cookie)
         if (localStorage.getItem('isOwner')) {
             this.$store.state.data.isOwner = true
         }

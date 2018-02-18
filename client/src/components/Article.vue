@@ -41,20 +41,20 @@ export default {
         })
     },
     methods: {
-        editArticle: function (item) {
+        editArticle(item) {
             this.$store.state.editor = {
                 show: 'article',
                 data: item
             }
 
         },
-        deleteArticle: function (id) {
+        deleteArticle(id) {
             if (!id) {
                 return
             }
             this.dataService.deleteArticle({
                 params: {
-                    id: id
+                    id
                 },
                 callback0: () => {
                     this.$store.state.editor.show = ''
