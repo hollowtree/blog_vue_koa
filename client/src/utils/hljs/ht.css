@@ -11,7 +11,7 @@ pre {
     display: block;
     overflow-x: auto;
     padding: 0.5em;
-    background: #dde7f1;
+    background: rgba(221, 231, 241, .5);
     /* background: #111; */
     /* color: #657b83; */
   }

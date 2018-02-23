@@ -75,35 +75,6 @@ export default {
 }
 </script>
 <style lang="less">
-.editor {
-  position: fixed;
-  top: 60px;
-  right: 10%;
-  bottom: 60px;
-  left: 10%;
-  background: rgba(255, 255, 255, 0.95); // border: 1px dotted #666;
-  box-shadow: 0 0 100px #bbb;
-  padding: 20px 50px;
-  input,
-  textarea {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 3px 10px;
-    border: none;
-    outline: none;
-  }
-  .title {
-    height: 50px;
-    border-bottom: 1px dotted #999;
-  }
-  textarea {
-    height: 80%;
-    margin: 20px 0;
-    resize: none;
-    border-bottom: 1px dotted #999;
-  }
-}
-
 .article {
   margin: 30px 0;
   border-bottom: 2px dashed #adb5ad;
@@ -112,6 +83,23 @@ export default {
     font-size: 14px;
     font-weight: 300;
     font-style: italic;
+  }
+  hr {
+    border-width: 0;
+    &:after {
+      content: "^^^^^";
+      display: table;
+      width: 100%;
+      letter-spacing: 30px;
+      text-align: center;
+      opacity: 0.5;
+    }
+  }
+  blockquote {
+    border-left: 5px solid #aed2e2;
+    background: rgba(115, 154, 171, 0.1);
+    margin: 0;
+    padding: 8px 24px;
   }
 }
 </style>
