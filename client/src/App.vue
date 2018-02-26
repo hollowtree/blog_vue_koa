@@ -23,13 +23,43 @@ export default {
 </script>
 
 <style lang="less">
+body {
+  -webkit-overflow-scrolling: touch;
+}
 #app {
   font-family: "Lato", "Avenir", Helvetica, "Microsoft YaHei", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
   //   color: #2c3e50;
   margin: 60px auto;
-  width: 80%;
+  width: e("calc(100% - 10px)");
+}
+@media (min-width: 576px) {
+  #app {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  #app {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  #app {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #app {
+    max-width: 1140px;
+  }
 }
 
 button {
@@ -66,12 +96,6 @@ li {
     content: "";
     display: table;
     clear: both;
-  }
-}
-@media screen and (max-width: 1024px) {
-  #app {
-    font-size: 24px;
-    width: 100%;
   }
 }
 </style>

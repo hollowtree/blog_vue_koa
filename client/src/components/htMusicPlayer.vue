@@ -4,7 +4,7 @@
   border-radius: 5px;
   overflow: hidden;
   border: 1px solid #aed2e2;
-  font-size: 14px;
+  font-size: .8rem;
 }
 #htMusic {
   display: none;
@@ -78,11 +78,18 @@
     margin-left: 20px;
   }
   .music-time {
-    font-size: 12px;
+    font-size: .75rem;
     vertical-align: middle;
     line-height: 40px;
     margin-right: 20px;
-    float: right;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+  }
+  @media (max-width: 992px) {
+    .music-time{
+        top: 10px;
+    }
   }
   .music-bar-container {
     // border: 1px solid rgba(174, 210, 226, 0.6);
@@ -146,17 +153,6 @@
   text-overflow: ellipsis;
 }
 
-@media screen and (max-width: 1024px) {
-  .ht-music {
-    .song-list {
-      li {
-        font-size: 2rem;
-        line-height: 4rem;
-        vertical-align: middle;
-      }
-    }
-  }
-}
 </style>
 <template>
     <div class="ht-music">
@@ -217,7 +213,7 @@ export default {
                 }
             }
             this.audioSrc = item.audioSrc
-            this.musicTitle = item.title + ' - ' + item.singer
+            this.musicTitle = item.title // + ' - ' + item.singer
             this.play = true
             setTimeout(() => {
                 let el = document.getElementById('htMusic')
