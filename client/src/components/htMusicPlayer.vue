@@ -155,7 +155,7 @@
         </div>
         <div class="song-list-container">
             <ul class="song-list">
-                <li v-for="(item, i) in songData" :key="i" @click="startPlay(item)">
+                <li v-for="(item, i) in musicList" :key="i" @click="startPlay(item)">
                     <span class="song-index">{{i + 1}}</span>
                     <span class="song-title">{{item.title}}</span>
                     <span class="song-singer">{{item.singer}}</span>
@@ -168,20 +168,18 @@
 export default {
     components: {
     },
+    props: {
+        musicList: {
+            type: Array,
+            default: []
+        }
+    },
     data() {
         return {
             audioSrc: '',
             musicTime: '00:00/00:00',
             play: false,
-            progress: 0,
-            songData: [
-                // {
-                //     title: 'mercy',
-                //     file_name: 'mercy',
-                //     singer: 'Matisse & Sadko/Hanne M',
-                //     audioSrc: 'http://127.0.0.1:8887/test.m4a'
-                // }
-            ]
+            progress: 0
         }
     },
     methods: {
