@@ -23,6 +23,9 @@ export default {
         fetch('/static/data/music.json').then(res => {
             return res.json()
         }).then(data => {
+            data.forEach(val => {
+                val.audioSrc = 'http://music.smalltree.me/' + val.file_name + '.mp3'
+            })
             this.musicList = data
         })
     }

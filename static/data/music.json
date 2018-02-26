@@ -1,9 +1,26 @@
 [
     {
-        "title": "mercy",
-        "file_name": "mercy",
-        "singer": "Matisse & Sadko/Hanne M",
-        "audioSrc": "http://127.0.0.1:8887/test.m4a",
+        "title": "Valder Fields",
+        "file_name": "Valder_Fields",
+        "singer": "Tamas Wells",
+        "coverSrc": ""
+    },
+    {
+        "title": "Meant To Be",
+        "file_name": "Meant_To_Be",
+        "singer": "Arc North/Krista Marina",
+        "coverSrc": ""
+    },
+    {
+        "title": "Promises Don't Come Easy",
+        "file_name": "Promises_Dont_Come_Easy",
+        "singer": "Caron Nightingale",
+        "coverSrc": ""
+    },
+    {
+        "title": "Victory",
+        "file_name": "Victory",
+        "singer": "Two Steps From Hell",
         "coverSrc": ""
     }
 ]

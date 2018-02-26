@@ -135,8 +135,7 @@
 </style>
 <template>
     <div class="ht-music">
-        <audio controls loop :src="audioSrc" id="htMusic">
-
+        <audio controls autoplay loop id="htMusic" :src="audioSrc">
         </audio>
         <div class="current-music">
             <div class="music-cover">
@@ -184,10 +183,12 @@ export default {
     },
     methods: {
         startPlay(item) {
-            if (!item && this.songData.length) {
-                item = this.songData[0]
-            } else {
-                return
+            if (!item) {
+                if (this.musicList.length) {
+                    item = this.musicList[0]
+                } else {
+                    return
+                }
             }
             this.audioSrc = item.audioSrc
             this.play = true
