@@ -1,10 +1,13 @@
 <template>
     <div class="navigation">
         <ul class="clearfix">
-            <li @click="showArticle">Article</li>
+            <li><router-link to="/">Article</router-link></li>
             <!-- <li @click="showSnippet">Snippet</li>
             <li @click="showMood">Mood</li>
             <li @click="showAll">All</li> -->
+            <li><router-link to="/music">Music</router-link></li>
+        
+            
             <li @click="showEditor" v-if="$store.state.data.isOwner">新建</li>
         </ul>
     </div>
@@ -12,9 +15,6 @@
 <script>
 export default {
     methods: {
-        showArticle() {
-
-        },
         showSnippet() {
 
         },
@@ -49,7 +49,15 @@ export default {
     float: left;
     list-style: none;
     line-height: 50px;
-    margin: 0 10px;
+    margin: 0 5px;
+    padding: 0 10px;
+    cursor: pointer;
+    a{
+        text-decoration: none;
+    }
+    &:hover{
+        background: #fff;
+    }
   }
 }
 </style>

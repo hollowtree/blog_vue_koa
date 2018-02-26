@@ -47,7 +47,19 @@ button {
     min-width: 60px;
   }
 }
-
+a {
+  color: inherit;
+}
+p {
+  margin: 0;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
 .clearfix {
   &:before,
   &:after {
