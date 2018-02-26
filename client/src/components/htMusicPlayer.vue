@@ -119,6 +119,7 @@
     padding: 0 15px;
     line-height: 28px;
     cursor: pointer;
+    white-space: nowrap;
     &:hover {
       background: #fff;
     }
@@ -126,11 +127,35 @@
 }
 .song-index {
   margin-right: 18px;
+  display: inline-block;
+  float: left;
 }
 .song-title {
+  max-width: 50%;
+  display: inline-block;
+  float: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .song-singer {
   float: right;
+  max-width: 40%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 1024px) {
+  .ht-music {
+    .song-list {
+      li {
+        font-size: 2rem;
+        line-height: 4rem;
+        vertical-align: middle;
+      }
+    }
+  }
 }
 </style>
 <template>
@@ -143,7 +168,7 @@
             </div>
             <i class="music-ctrl-btn" :class="play ? 'pause' : 'play'" @click="playOrPause"></i>
             <p>
-                <span class="music-title">{{'Wrong - Far Out'}}</span>
+                <span class="music-title">{{musicTitle}}</span>
                 <span class="music-time">{{musicTime}}</span>
             </p>
             <div class="music-bar-container">
@@ -154,7 +179,7 @@
         </div>
         <div class="song-list-container">
             <ul class="song-list">
-                <li v-for="(item, i) in musicList" :key="i" @click="startPlay(item)">
+                <li v-for="(item, i) in musicList" :key="i" @click="startPlay(item)" class="clearfix">
                     <span class="song-index">{{i + 1}}</span>
                     <span class="song-title">{{item.title}}</span>
                     <span class="song-singer">{{item.singer}}</span>
@@ -176,6 +201,7 @@ export default {
     data() {
         return {
             audioSrc: '',
+            musicTitle: '',
             musicTime: '00:00/00:00',
             play: false,
             progress: 0
@@ -191,6 +217,7 @@ export default {
                 }
             }
             this.audioSrc = item.audioSrc
+            this.musicTitle = item.title + ' - ' + item.singer
             this.play = true
             setTimeout(() => {
                 let el = document.getElementById('htMusic')

@@ -68,4 +68,10 @@ li {
     clear: both;
   }
 }
+@media screen and (max-width: 1024px) {
+  #app {
+    font-size: 24px;
+    width: 100%;
+  }
+}
 </style>
