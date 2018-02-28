@@ -50,11 +50,11 @@ export default {
     created() {
     },
     methods: {
-        cancelArticle: function () {
+        cancelArticle () {
             this.$store.state.editor.show = ''
             this.$store.state.editor.item = {}
         },
-        postArticle: function () {
+        postArticle () {
             if (!/\S/.test(this.$store.state.editor.data.title) || !/\S/.test(this.$store.state.editor.data.content)) {
                 return
             }

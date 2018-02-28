@@ -49,13 +49,13 @@ export default {
 
     },
     methods: {
-        jumpToSignUp: function () {
+        jumpToSignUp () {
             this.show = 'signup'
         },
-        jumpToLogIn: function () {
+        jumpToLogIn () {
             this.show = 'login'
         },
-        postSignUp: function (item) {
+        postSignUp () {
             if (!this.signUp.username || !this.signUp.email || !this.signUp.passwd) {
                 return
             }
@@ -72,7 +72,7 @@ export default {
                 }
             })
         },
-        postLogIn: function () {
+        postLogIn () {
             if (!this.logIn.email || !this.logIn.passwd) {
                 return
             }

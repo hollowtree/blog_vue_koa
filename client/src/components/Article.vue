@@ -41,20 +41,20 @@ export default {
         })
     },
     methods: {
-        editArticle: function (item) {
+        editArticle(item) {
             this.$store.state.editor = {
                 show: 'article',
                 data: item
             }
 
         },
-        deleteArticle: function (id) {
+        deleteArticle(id) {
             if (!id) {
                 return
             }
             this.dataService.deleteArticle({
                 params: {
-                    id: id
+                    id
                 },
                 callback0: () => {
                     this.$store.state.editor.show = ''
@@ -76,8 +76,9 @@ export default {
 </script>
 <style lang="less">
 .article {
-  margin: 30px 0;
-  border-bottom: 2px dashed #adb5ad;
+    padding: 15px 0;
+    // border-bottom: 2px dashed #adb5ad;
+    border-bottom: 1px solid rgba(63, 135, 166, .7);
   .date {
     color: #ccc;
     font-size: 14px;
