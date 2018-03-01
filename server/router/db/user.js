@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/blog')
+const dbTableName = require('../../../config').dbTableName || 'blog'
+
+mongoose.connect('mongodb://localhost/' + dbTableName)
 
 const userSchema = mongoose.Schema({
     username: String,

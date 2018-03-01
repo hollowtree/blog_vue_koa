@@ -1,6 +1,7 @@
 'use strict'
 // see http://vuejs-templates.github.io/webpack for documentation.
 const path = require('path')
+const port = require('../../config').port || 4000
 
 module.exports = {
     build: {
@@ -34,7 +35,7 @@ module.exports = {
         assetsPublicPath: '/',
         proxyTable: {
             '/v1/api': {
-                target: 'http://127.0.0.1:4000',
+                target: 'http://127.0.0.1:' + port,
                 changeOrigin: true,
                 pathRewrite: {
                     '^/api': ''
