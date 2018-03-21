@@ -8,6 +8,9 @@
     </div>
 </template>
 <style lang="less">
+body {
+  background: #dbeef7;
+}
 .bg-tree {
   position: fixed;
   left: 0;
@@ -25,25 +28,25 @@
   width: 100%;
   height: 100%;
 }
-.wl {
-  background: #dbeef7;
-  overflow: hidden;
+// .wl {
+//   background: #dbeef7;
+//   overflow: hidden;
+// }
+.wn {
+  background: url(//wx1.sinaimg.cn/large/006p0t5Agy1fplhjfddywj303l02ywed.jpg)
+    no-repeat 76px bottom;
 }
-// .wn {
-//   background: url(//wx1.sinaimg.cn/large/006p0t5Agy1fplhjfddywj303l02ywed.jpg)
-//     no-repeat 76px bottom;
-// }
-// .wo {
-//   background: url(//wx3.sinaimg.cn/large/006p0t5Agy1fplhjlqw8mj309803mq2q.jpg)
-//     repeat-x bottom left;
-// }
-// .wq {
-//   background: url(//wx2.sinaimg.cn/large/006p0t5Agy1fplhjwrzqfg300a08b741.gif)
-//     repeat-x;
-// }
-// .wp {
-//   background: url(//wx3.sinaimg.cn/large/006p0t5Agy1fplhjr7jbvj30ap08b0sl.jpg)
-//     no-repeat;
-// }
+.wo {
+  background: url(//wx3.sinaimg.cn/large/006p0t5Agy1fplhjlqw8mj309803mq2q.jpg)
+    repeat-x bottom left;
+}
+.wq {
+  background: url(//wx2.sinaimg.cn/large/006p0t5Agy1fplhjwrzqfg300a08b741.gif)
+    repeat-x;
+}
+.wp {
+  background: url(//wx3.sinaimg.cn/large/006p0t5Agy1fplhjr7jbvj30ap08b0sl.jpg)
+    no-repeat;
+}
 </style>
 
