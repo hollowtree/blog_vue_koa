@@ -20,6 +20,11 @@ db.once('open', function () {
 });
 
 app.use(async (ctx, next) => {
+    // --- 禁止直接从 IP 访问
+    if(!/[a-z]/.test(ctx.request.host)){
+        ctx.body = 'Not Found';
+        return
+    }
     console.log(`Process ${ctx.request.method} ${ctx.request.url}...`)
     await next()
 })
